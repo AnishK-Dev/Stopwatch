@@ -15,14 +15,13 @@ function Start() {
 function Stop() {
     if (isRunning) {
         clearInterval(timer);
-        elapsedTime = Date.now() - elapsedTime;
         isRunning = false;
     }
 }
 
 function Reset() {
     clearInterval(timer);
-    elapsedTime = Date.now() - elapsedTime;
+    elapsedTime = 0;
     isRunning = false;
     display.textContent = "00:00:00:00";
 }
@@ -30,6 +29,7 @@ function Reset() {
 function update() {
     const currentTime = Date.now();
     elapsedTime = currentTime - startTime;
+
     let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
     let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);
     let seconds = Math.floor(elapsedTime / 1000 % 60);
@@ -39,5 +39,6 @@ function update() {
     minutes = String(minutes).padStart(2, "0");
     seconds = String(seconds).padStart(2, "0");
     milliseconds = String(milliseconds).padStart(2, "0");
+
     display.textContent = `${hours}:${minutes}:${seconds}:${milliseconds}`;
 }
